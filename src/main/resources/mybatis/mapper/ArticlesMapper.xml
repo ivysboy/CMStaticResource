@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wuyuan.util.mapper.ArticlesMapper">
+
+    <insert id="insertArticle" parameterType="com.wuyuan.util.module.ArticleDto">
+        INSERT INTO articles (
+        <if test="id != null and id != ''">
+            id,
+        </if>
+        <if test="name != null and name != ''">
+            name,
+        </if>
+        <if test="content != null and content != ''">
+            content,
+        </if>
+        <if test="brief != null and brief != ''">
+            brief,
+        </if>
+        <if test="image != null and image != ''">
+            image,
+        </if>
+        create_time)
+        VALUES (
+        <if test="id != null and id != ''">
+            #{id,jdbcType=VARCHAR},
+        </if>
+        <if test="name != null and name != ''">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="content != null and content != ''">
+            #{content,jdbcType=VARCHAR},
+        </if>
+        <if test="brief != null and brief != ''">
+            #{brief,jdbcType=VARCHAR},
+        </if>
+        <if test="image != null and image != ''">
+            #{image,jdbcType=VARCHAR},
+        </if>
+        now());
+    </insert>
+    <update id="updateArticle" parameterType="com.wuyuan.util.module.ArticleDto">
+        UPDATE articles SET
+        <if test="name != null and name != ''">
+            name=#{name},
+        </if>
+        <if test="content != null and content != ''">
+            content=#{content},
+        </if>
+        <if test="brief != null and brief != ''">
+            brief=#{brief},
+        </if>
+        <if test="image != null and image != ''">
+            image=#{image},
+        </if>
+        update_time = now()
+        WHERE id = #{id}
+    </update>
+    <select id="getArticlesPage" resultType="com.wuyuan.util.module.ArticleDto">
+        SELECT
+          id AS id,
+          name AS name,
+          content AS content,
+          create_time AS createTime,
+          brief AS brief,
+          image AS image
+
+        FROM articles
+        WHERE 1=1
+    </select>
+    <select id="getArticleById" resultType="com.wuyuan.util.module.ArticleDto">
+        SELECT
+          id AS id,
+          name AS name,
+          content AS content,
+          create_time AS createTime,
+          brief AS brief,
+          image AS image
+
+        FROM articles
+        WHERE id=#{id}
+    </select>
+
+</mapper>
