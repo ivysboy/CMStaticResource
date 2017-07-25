@@ -1,6 +1,6 @@
 server:
   port: 8098
-  context-path: /coffee-mate
+  context-path: /CMStaticResource
 
 logging:
 level:
